@@ -56,7 +56,7 @@ export const AudioPro = {
 	 * @param options.debug - Enable debug logging
 	 * @param options.debugIncludesProgress - Include progress events in debug logs
 	 * @param options.progressIntervalMs - Interval in milliseconds for progress events
-	 * @param options.skipInterval - Skip interval in seconds
+	 * @param options.skipIntervalMs - Interval in milliseconds for skip forward/back actions
 	 * @param options.showNextPrevControls - Whether to show next/previous controls in notification
 	 * @param options.showSkipControls - Whether to show skip forward/back controls in notification
 	 */
@@ -81,6 +81,15 @@ export const AudioPro = {
 				'[react-native-audio-pro]: showNextPrevControls and showSkipControls are mutually exclusive. showSkipControls will be set to false.',
 			);
 			config = { ...config, showSkipControls: false };
+		}
+		if (config.skipInterval) {
+			// Warn if deprecated skipInterval configuration was used
+			console.warn(
+				'[react-native-audio-pro]: skipInterval is deprecated and will be removed in a future release. Use `skipIntervalMs` instead.',
+			);
+			// Remove deprecated skipInterval property, and transform to value in milliseconds
+			const { skipInterval: skipIntervalDeprecated, ...fixedConfig } = config;
+			config = { ...fixedConfig, skipIntervalMs: skipIntervalDeprecated * 1000 };
 		}
 		setConfigureOptions(config);
 		setDebug(!!options.debug);

@@ -20,7 +20,7 @@ export function setupAudioPro(): void {
 		progressIntervalMs: 1000,
 		showNextPrevControls: true,
 		showSkipControls: false,
-		skipInterval: 30,
+		skipIntervalMs: 30000,
 	});
 
 	// Set up event listeners that persist for the app's lifetime

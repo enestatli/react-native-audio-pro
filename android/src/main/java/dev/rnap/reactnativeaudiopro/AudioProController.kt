@@ -46,7 +46,7 @@ object AudioProController {
 	var settingAudioContentType: Int = C.AUDIO_CONTENT_TYPE_MUSIC
 	var settingShowNextPrevControls: Boolean = true
 	var settingShowSkipControls: Boolean = false
-	var settingSkipIntervalSeconds: Double = 10.0
+	var settingSkipIntervalMs: Long = 30000L
 
 	var headersAudio: Map<String, String>? = null
 	var headersArtwork: Map<String, String>? = null
@@ -97,7 +97,7 @@ object AudioProController {
 		val progressIntervalMs: Long,
 		val showNextPrevControls: Boolean,
 		val showSkipControls: Boolean,
-		val skipInterval: Double,
+		val skipIntervalMs: Long,
 	)
 
 	// Extracts and applies play options from JS before playback
@@ -122,8 +122,8 @@ object AudioProController {
 			if (options.hasKey("showNextPrevControls")) options.getBoolean("showNextPrevControls") else true
 		val showSkip =
 			if (options.hasKey("showSkipControls")) options.getBoolean("showSkipControls") else true
-		val skipInterval =
-			if (options.hasKey("skipInterval")) options.getDouble("skipInterval") else 10.0
+		val skipIntervalMs =
+			if (options.hasKey("skipIntervalMs")) options.getDouble("skipIntervalMs").toLong() else 30000L
 
 		// Warn if showNextPrevControls is changed after session initialization
 		if (::engineBrowserFuture.isInitialized && enginerBrowser != null && showControls != settingShowNextPrevControls) {
@@ -164,7 +164,7 @@ object AudioProController {
 		settingProgressIntervalMs = progressInterval
 		settingShowNextPrevControls = resolvedShowNextPrev
 		settingShowSkipControls = resolvedShowSkip
-		settingSkipIntervalSeconds = skipInterval
+		settingSkipIntervalMs = skipIntervalMs
 
 		return PlaybackOptions(
 			contentType,
@@ -177,7 +177,7 @@ object AudioProController {
 			progressInterval,
 			resolvedShowNextPrev,
 			resolvedShowSkip,
-			skipInterval,
+			skipIntervalMs,
 		)
 	}
 
@@ -226,7 +226,7 @@ object AudioProController {
 				"progressIntervalMs=${opts.progressIntervalMs} " +
 				"showNextPrevControls=${opts.showNextPrevControls} " +
 				"showSkipControls=${opts.showSkipControls} " +
-				"skipInterval=${opts.skipInterval}"
+				"skipIntervalMs=${opts.skipIntervalMs}"
 		)
 
 		val url = track.getString("url") ?: run {

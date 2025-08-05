@@ -134,14 +134,12 @@ open class AudioProMediaLibrarySessionCallback : MediaLibraryService.MediaLibrar
 			}
 
 			CUSTOM_COMMAND_SKIP_FORWARD -> {
-				val skipAmountMs = (AudioProController.settingSkipIntervalSeconds * 1000).toLong()
-				AudioProController.seekForward(skipAmountMs)
+				AudioProController.seekForward(AudioProController.settingSkipIntervalMs)
 				return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS))
 			}
 
 			CUSTOM_COMMAND_SKIP_BACKWARD -> {
-				val skipAmountMs = (AudioProController.settingSkipIntervalSeconds * 1000).toLong()
-				AudioProController.seekBack(skipAmountMs)
+				AudioProController.seekBack(AudioProController.settingSkipIntervalMs)
 				return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS))
 			}
 		}

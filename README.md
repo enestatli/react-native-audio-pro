@@ -234,7 +234,7 @@ AudioPro.configure({
   contentType: AudioProContentType.MUSIC,
   showNextPrevControls: true, // Hide next/previous buttons
   showSkipControls: false,      // Show skip/seek forward/back buttons (default: true)
-  skipInterval: 30,            // Number of seconds for skip/seek (default: 30)
+  skipIntervalMs: 30000,            // Number of milliseconds for skip forward/back controls (default: 30000)
 });
 ```
 
@@ -243,8 +243,8 @@ AudioPro.configure({
   If your app only plays single tracks, set to `false`.
 - `showSkipControls` — Show skip/seek forward/backward buttons (default: `false`).
   If enabled, lock screen and notification controls will include skip forward/backward (seek) buttons.
-- `skipInterval` — The interval (in seconds) used for skip forward/back controls.
-  If not set, defaults to 30 seconds.
+- `skipIntervalMs` — The interval (in milliseconds) used for skip forward/back controls.
+  If not set, defaults to 30000 (30 seconds).
 
 > ⚠️ **Only one set of controls can be active at a time.**
 > If both `showNextPrevControls` and `showSkipControls` are set to `true`, only Next/Prev controls will be shown (Skip controls will be ignored).
@@ -256,7 +256,7 @@ AudioPro.configure({
   contentType: AudioProContentType.SPEECH,
   showNextPrevControls: false,
   showSkipControls: true,      // Only show skip/seek buttons
-  skipInterval: 15,            // 15 second skip
+  skipIntervalMs: 15000,       // 15 second skip
 });
 ```
 
@@ -300,7 +300,7 @@ type AudioProSetupOptions = {
     progressIntervalMs?: number;       // Frequency (in ms) for PROGRESS events (default: 1000ms)
     showNextPrevControls?: boolean;    // Show next/previous buttons (default: true)
     showSkipControls?: boolean;        // Show skip/seek forward/back buttons (default: true)
-    skipInterval?: number;             // Skip interval in seconds (default: 30)
+    skipIntervalMs?: number;           // Interval in milliseconds for skip forward/back controls (default: 30000)
 };
 
 type AudioProPlayOptions = {
