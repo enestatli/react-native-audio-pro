@@ -20,6 +20,12 @@ export { AudioPro } from './audioPro';
 export { useAudioPro } from './useAudioPro';
 
 /**
+ * Zustand store for managing audio playback state
+ * @see {@link ./internalStore}
+ */
+export { internalStore as useAudioProStore } from './internalStore';
+
+/**
  * Type definitions for AudioPro
  * @see {@link ./types}
  */
