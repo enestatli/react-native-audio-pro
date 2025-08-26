@@ -20,5 +20,5 @@ export interface AudioProStore {
     setError: (error: AudioProPlaybackErrorPayload | null) => void;
     updateFromEvent: (event: AudioProEvent) => void;
 }
-export declare const internalStore: import("zustand").UseBoundStore<import("zustand").StoreApi<AudioProStore>>;
+export declare const internalStore: import("zustand/traditional").UseBoundStoreWithEqualityFn<import("zustand/vanilla").StoreApi<AudioProStore>>;
 //# sourceMappingURL=internalStore.d.ts.map

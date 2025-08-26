@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 import { normalizeVolume } from './utils';
 import { AudioProEventType, AudioProState, DEFAULT_CONFIG } from './values';
@@ -31,7 +31,7 @@ export interface AudioProStore {
 	updateFromEvent: (event: AudioProEvent) => void;
 }
 
-export const internalStore = create<AudioProStore>((set, get) => ({
+export const internalStore = createWithEqualityFn<AudioProStore>((set, get) => ({
 	playerState: AudioProState.IDLE,
 	position: 0,
 	duration: 0,
