@@ -88,14 +88,8 @@ open class AudioProPlaybackService : MediaLibraryService() {
 		val notificationManagerCompat = NotificationManagerCompat.from(this)
 		ensureNotificationChannel(notificationManagerCompat)
 
-		val icon = try {
-			applicationInfo.icon.takeIf { it != 0 } ?: android.R.drawable.sym_def_app_icon
-		} catch (e: Exception) {
-			android.R.drawable.sym_def_app_icon
-		}
-
 		val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-			.setSmallIcon(icon)
+			.setSmallIcon(R.drawable.ic_notification)
 			.setContentTitle("Audio")
 			.setContentText("Playing...")
 			.setPriority(NotificationCompat.PRIORITY_MAX)
